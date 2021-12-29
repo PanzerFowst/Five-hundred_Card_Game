@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
 
         GameObject.Find("Deck").GetComponent<DeckScript>().Shuffle();
         GameObject.Find("Deck").GetComponent<DeckScript>().DealTheCards(playerUp, playerDn, playerRt, playerLf);
-        playerUp.SortHandUsingDefault();
+        playerUp.SortHandUsingStandard();
         playerUp.DisplayHand();
         playerDn.DisplayHand();
         playerRt.DisplayHand();

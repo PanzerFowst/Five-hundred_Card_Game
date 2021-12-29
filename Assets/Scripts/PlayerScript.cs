@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
@@ -46,14 +46,16 @@ public class PlayerScript : MonoBehaviour {
         
     }
 
-    public void SortHandUsingDefault() {
+    public void SortHandUsingStandard() {
         
         // Copy the and sort the hand:
-        GameObject[] tempHand = hand;
-        Array.Sort(tempHand, new SortUsingDefaults());
+        List<GameObject> tempHand = hand.ToList();
+
+        HandSorter handSorter = new HandSorter { sortingOrder = HandSorter.SortBy.Standard };
+        //tempHand.Sort(handSorter);
 
         // Reassigning the hand to the sorted hand:
-        hand = tempHand;
+        hand = tempHand.ToArray();
         
     }
 
@@ -88,21 +90,59 @@ public class PlayerScript : MonoBehaviour {
 
 
 
-public class SortUsingDefaults : Comparer<CardScript> {
+public class HandSorter : IComparer<CardScript> {
     
+    /// Options to sort by.  TODO: Will have to work on more of this sorting by black, red, black, red later...
+    public enum SortBy  
+    {
+        Standard,
+        NoTrump,
+        HeartsTrump,
+        DiamondsTrump,
+        ClubsTrump,
+        SpadesTrump
+    }
+    
+    /// Sets initial sort order.
+    public SortBy sortingOrder = SortBy.Standard;
+
     /// Compares by Suit, then value.
-    public override int Compare(CardScript x, CardScript y) {
+    public int Compare(CardScript x, CardScript y) {
 
+        // Make sure non-null objects:
+        if (x == null || y == null)
+            throw new ArgumentNullException();
+        
         // Comparison logic:
-        if (x.cardSuit != y.cardSuit) {
+        switch (sortingOrder)
+        {
 
-            // Return the higher Suit.
-            return x.cardSuit.CompareTo(y.cardSuit);
+            /*case SortBy.HeartsTrump:
+                
+                break;
+            case SortBy.DiamondsTrump:
+                
+                break;
+            case SortBy.ClubsTrump:
+                
+                break;
+            case SortBy.SpadesTrump:
+                
+                break;*/
 
-        } else {
+            default:  // (For NoTrump, Standard, and Nullo)
+                
+                if (x.cardSuit != y.cardSuit) {
 
-            // Return the comparison of the card values since they are the same suit:
-            return x.cardValue.CompareTo(y.cardValue);
+                    // Return the higher Suit.
+                    return x.cardSuit.CompareTo(y.cardSuit);
+
+                } else {
+
+                    // Return the comparison of the card values since they are the same suit:
+                    return x.cardValue.CompareTo(y.cardValue);
+
+                }
 
         }
 
