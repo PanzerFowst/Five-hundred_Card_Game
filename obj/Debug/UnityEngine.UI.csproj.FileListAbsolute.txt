@@ -1,0 +1,4 @@
+C:\Users\amimo\OneDrive - University of St. Thomas\Unity Stuffs\Five-hundred\obj\Debug\UnityEngine.UI.csprojResolveAssemblyReference.cache
+C:\Users\amimo\OneDrive - University of St. Thomas\Unity Stuffs\Five-hundred\obj\Debug\UnityEngine.UI.csprojAssemblyReference.cache
+C:\Users\amimo\OneDrive - University of St. Thomas\Unity Stuffs\Five-hundred\obj\Debug\UnityEngine.UI.csproj.CoreCompileInputs.cache
+C:\Users\amimo\OneDrive - University of St. Thomas\Unity Stuffs\Five-hundred\obj\Debug\UnityEngine.UI.dll
